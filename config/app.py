@@ -9,8 +9,8 @@ FILE_DIR = os.path.join(BASE_DIR, "data")
 if not os.path.exists(FILE_DIR):
     os.makedirs(FILE_DIR, exist_ok=True)
 
-PG_HOST = "localhost"
+PG_HOST = os.getenv("PG_HOST")
 PG_PORT = 5432
-PG_USER = "postgres"
+PG_USER = "kai"
 PG_PASS = os.getenv("PG_PASSWORD")
 PG_DB = "geo"

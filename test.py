@@ -1,4 +1,11 @@
-from classes import GR
+from classes import Data, Postgres, ETL
 
-#GR.download_geo_data()
-GR.download_dataset_catalogs()
+#Data.download_geo_data()
+#Data.download_dataset_catalogs()
+
+Postgres.connect()
+
+ETL.run_pipeline()
+
+
+Postgres.close()

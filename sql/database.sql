@@ -1,6 +1,6 @@
 CREATE EXTENSION IF NOT EXISTS postgis;
 
-CREATE TABLE public.geodaten (
+CREATE TABLE IF NOT EXISTS public.geodaten (
     id SERIAL PRIMARY KEY,
     name VARCHAR(256) NOT NULL,
     geom GEOMETRY(Geometry, 4326),

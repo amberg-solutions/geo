@@ -1,20 +1,18 @@
-from flask import Flask, render_template, jsonify
-from classes import Map
+from flask import Flask
 
-app = Flask(__name__)
-
-@app.route("/")
-def index():
-
-    return render_template("index.html")
-
-@app.route("/get_map")
-def get_map():
-    
-    html_map = Map.build_html_map()
-    return jsonify({"map" : html_map})
+from routes.api import register_api_routes
+from routes.endpoints import register_page_routes
 
 
+def create_app() -> Flask:
+    app = Flask(__name__)
+    register_page_routes(app)
+    register_api_routes(app)
+    return app
 
-if __name__ == '__main__':
+
+app = create_app()
+
+
+if __name__ == "__main__":
     app.run(debug=True, port=8000)

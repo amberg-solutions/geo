@@ -36,11 +36,9 @@
                 <label class="visually-hidden" for="search-query">Karte durchsuchen</label>
                 <input id="search-query" name="query" type="search" placeholder="Ort, Adresse oder Objekt suchen">
             </div>
-            <label class="visually-hidden" for="search-category">Kategorie</label>
-            <select id="search-category" name="category">
-                <option value="all">Alle Kategorien</option>
-                <option value="locations">Standorte</option>
-                <option value="offices">Ämter</option>
+            <label class="visually-hidden" for="search-region">Region</label>
+            <select id="search-region" name="region">
+                <option value="all" selected>Alle Regionen</option>
             </select>
             <button class="primary-button" type="submit">
                 <i data-lucide="arrow-right" aria-hidden="true"></i>
@@ -59,11 +57,11 @@
             </article>
             <article class="kpi-card">
                 <span class="kpi-icon kpi-icon-coral"><i data-lucide="scan"></i></span>
-                <div><span>Fläche</span><strong>—</strong></div>
+                <div><span>Fläche</span><strong id="surface-area">—</strong></div>
             </article>
             <article class="kpi-card">
                 <span class="kpi-icon kpi-icon-gold"><i data-lucide="calendar-days"></i></span>
-                <div><span>Aktualisiert</span><strong>—</strong></div>
+                <div><span>Aktualisiert</span><strong id="last-update"></strong></div>
             </article>
         </section>
 

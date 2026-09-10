@@ -1,6 +1,4 @@
-import pandas as pd
 import folium
-from folium.plugins import MarkerCluster
 
 class Map:
 
@@ -47,11 +45,20 @@ class Map:
     """
 
     @staticmethod
-    def build_html_map() -> object:
+    def build_html_map(geo_data: list[dict], region: str = "all") -> str:
 
         m = folium.Map(location=Map.GR_COORDS, zoom_start=9, width="100%", height="100%")
-        folium.Marker(Map.MY_COORDS, popup=Map.MY_POPUP).add_to(m)
-        folium.Marker(Map.ALG_COORDS, popup=Map.ALG_POPUP).add_to(m)
+        folium.Marker(Map.MY_COORDS, popup=Map.MY_POPUP, icon=folium.Icon("blue")).add_to(m)
+        folium.Marker(Map.ALG_COORDS, popup=Map.ALG_POPUP, icon=folium.Icon("black")).add_to(m)
+
+        for item in geo_data:
+            name = item["name"]
+            geometry = folium.GeoJson(
+                data=item["geom"],
+                tooltip=name
+            )
+            geometry.add_to(m)
+            folium.Marker(item["point"], item["name"]).add_to(m)
 
         return m.get_root().render()
 

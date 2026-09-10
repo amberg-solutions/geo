@@ -1,7 +1,7 @@
 import requests
 from classes.helper import write_json
 
-class GR:
+class Data:
 
     BASE_URL = "https://data.gr.ch/api/explore/v2.1/"
 

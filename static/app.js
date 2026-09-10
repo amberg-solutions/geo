@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const regionSelect = document.getElementById("search-region");
+
     if (window.lucide) {
         window.lucide.createIcons();
     }
@@ -7,19 +9,28 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
     });
 
+    regionSelect.addEventListener("change", () => {
+        fetchHtmlMap(regionSelect.value);
+        fetchSurfaceArea(regionSelect.value);
+    });
+
     fetchHtmlMap();
+    fetchRegions();
+    fetchLastUpdateTs();
+    fetchSurfaceArea();
 });
 
-async function fetchHtmlMap() {
+async function fetchHtmlMap(region = "all") {
     const mapNode = document.getElementById("map");
     const loadingNode = document.getElementById("map-loading");
     const statusNode = document.getElementById("map-status");
 
     try {
-        const response = await fetch("/get_map");
+        const params = new URLSearchParams({ region });
+        const response = await fetch(`/api/get_map?${params}`);
 
         if (!response.ok) {
-            throw new Error(`Fehler beim Abrufen von /get_map: ${response.status}`);
+            throw new Error(`Fehler beim Abrufen von /api/get_map: ${response.status}`);
         }
 
         const data = await response.json();
@@ -35,5 +46,67 @@ async function fetchHtmlMap() {
         loadingNode.innerHTML = "<span>Karte konnte nicht geladen werden.</span>";
         statusNode.lastChild.textContent = "Fehler beim Laden";
         console.error(`Fehler beim Abrufen der Karte: ${error}`);
+    }
+}
+
+async function fetchRegions() {
+    const regionSelect = document.getElementById("search-region");
+
+    try {
+        const response = await fetch("/api/fetch_regions");
+
+        if (!response.ok) {
+            throw new Error(`Fehler beim Abfragen von /api/fetch_regions: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const regions = data.regions;
+        const options = document.createDocumentFragment();
+
+        for (const region of regions) {
+            options.append(new Option(region, region));
+        }
+
+        regionSelect.append(options);
+    } catch (error) {
+        regionSelect.disabled = true;
+        console.error(`Fehler beim Abrufen der Regionen: ${error}`);
+    }
+}
+
+async function fetchLastUpdateTs() {
+    const lastUpdateNode = document.getElementById("last-update");
+
+    try {
+        response = await fetch(`/api/fetch_last_update_ts`);
+
+        if (!response.ok) {
+            throw new Error(`Fehler beim Abfragen von /api/fetch_last_update_ts: ${response.status}`);
+        }
+
+        data = await response.json();
+        lastUpdateNode.innerHTML = data["ts"] ?? `-`
+    } catch (error) {
+        log.error(`Fehler beim Abfragen des letzten Updates: ${error}`);
+        lastUpdateNode = ``
+    }
+}
+
+async function fetchSurfaceArea(region = "all") {
+    const surfaceAreaNode = document.getElementById("surface-area");
+    const params = new URLSearchParams({ region });
+
+    try {
+        const response = await fetch(`/api/fetch_surface_area?${params}`);
+
+        if (!response.ok) {
+            throw new Error(`Fehler beim Abfragen von /api/fetch_surface_area: ${response.status}`);
+        }
+
+        const data = await response.json();
+        surfaceAreaNode.textContent = data.area ?? "-";
+    } catch (error) {
+        console.error(`Fehler beim Abfragen der Fläche: ${error}`);
+        surfaceAreaNode.textContent = "-";
     }
 }
