@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f4f6f2">
+    <title>Geoportal Graubünden - von Kai Lanz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="/" aria-label="Geoportal Startseite">
+            <span class="brand-mark" aria-hidden="true"><i data-lucide="map"></i></span>
+            <span>
+                <strong>Geoportal</strong>
+                <small>Graubünden</small>
+            </span>
+        </a>
+        <span>
+            <strong>von Kai Lanz</strong>
+        </span>
+    </header>
+
+    <main>
+        <section class="intro" aria-labelledby="page-title">
+            <div>
+                <p class="eyebrow">Raumdaten</p>
+                <h2 id="page-title">Kartenübersicht</h2>
+            </div>
+            <p class="intro-copy">Standorte und Kennzahlen im Kanton Graubünden.</p>
+        </section>
+
+        <form class="search-bar" id="map-search" role="search">
+            <div class="search-field">
+                <i data-lucide="search" aria-hidden="true"></i>
+                <label class="visually-hidden" for="search-query">Karte durchsuchen</label>
+                <input id="search-query" name="query" type="search" placeholder="Ort, Adresse oder Objekt suchen">
+            </div>
+            <label class="visually-hidden" for="search-category">Kategorie</label>
+            <select id="search-category" name="category">
+                <option value="all">Alle Kategorien</option>
+                <option value="locations">Standorte</option>
+                <option value="offices">Ämter</option>
+            </select>
+            <button class="primary-button" type="submit">
+                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                <span>Suchen</span>
+            </button>
+        </form>
+
+        <section class="kpi-grid" aria-label="Kennzahlen">
+            <article class="kpi-card">
+                <span class="kpi-icon kpi-icon-green"><i data-lucide="map-pin"></i></span>
+                <div><span>Standorte</span><strong>—</strong></div>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-icon kpi-icon-blue"><i data-lucide="landmark"></i></span>
+                <div><span>Gemeinden</span><strong>—</strong></div>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-icon kpi-icon-coral"><i data-lucide="scan"></i></span>
+                <div><span>Fläche</span><strong>—</strong></div>
+            </article>
+            <article class="kpi-card">
+                <span class="kpi-icon kpi-icon-gold"><i data-lucide="calendar-days"></i></span>
+                <div><span>Aktualisiert</span><strong>—</strong></div>
+            </article>
+        </section>
+
+        <section class="map-panel" aria-labelledby="map-title">
+            <div class="map-panel-header">
+                <div>
+                    <p class="eyebrow">Interaktive Karte</p>
+                </div>
+                <span class="map-status" id="map-status"><span></span>Karte wird geladen</span>
+            </div>
+            <div class="map-frame">
+                <iframe id="map" title="Interaktive Karte von Graubünden"></iframe>
+                <div class="map-loading" id="map-loading" aria-live="polite">
+                    <span class="spinner"></span>
+                    <span>Karte wird geladen</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="project-story" aria-labelledby="project-story-title">
+            <div class="story-intro">
+                <p class="eyebrow">Projektaufbau</p>
+                <h2 id="project-story-title">Vom Python-Backend zur interaktiven Karte</h2>
+                <p>
+                    Dieses Beispielprojekt lädt zyklisch Daten vom Datenportal Graubünden zu Toursimusdestinationen 
+                    und speichert diese in meiner Postgres Datenbank. Beim Besuch der Seite, werden die Daten
+                    asynchron von Javascript via eigener API aus Postgres abgerufen und im Frontend gerendert.
+                </p>
+                <div class="tech-list" aria-label="Verwendete Technologien">
+                    <span>Python</span>
+                    <span>PostgreSQL</span>
+                    <span>Flask</span>
+                    <span>Folium</span>
+                    <span>Leaflet</span>
+                    <span>JavaScript</span>
+                </div>
+            </div>
+
+            <ol class="architecture-flow">
+                <li>
+                    <span class="step-number">01</span>
+                    <div>
+                        <h3>Anfrage</h3>
+                        <p>Der Browser lädt die Oberfläche und ruft anschließend den Endpunkt <code>/get_map</code> auf.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="step-number">02</span>
+                    <div>
+                        <h3>Verarbeitung</h3>
+                        <p>Das Backend bereitet die Daten aus dem Backend bzw. via API aus Postgres auf.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="step-number">03</span>
+                    <div>
+                        <h3>Darstellung</h3>
+                        <p>Das Frontend übernimmt das Ergebnis als JSON und rendert die fertige Karte in einem iframe.</p>
+                    </div>
+                </li>
+            </ol>
+
+            <div class="source-strip">
+                <div>
+                    <i data-lucide="code-2" aria-hidden="true"></i>
+                    <div>
+                        <strong>Quellcode & Schnittstelle</strong>
+                    </div>
+                </div>
+                <nav class="source-actions" aria-label="Projektressourcen">
+                    <a href="/get_map" target="_blank" rel="noreferrer">
+                        <i data-lucide="braces" aria-hidden="true"></i>
+                        API ansehen
+                    </a>
+                    <span class="source-link-pending" aria-label="GitHub-Link folgt">
+                        <i data-lucide="github" aria-hidden="true"></i>
+                        GitHub folgt
+                    </span>
+                </nav>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>
