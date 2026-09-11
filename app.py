@@ -16,7 +16,7 @@ def refresh_data() -> None:
             ETL.run_pipeline()
         finally:
             Postgres.close()
-        sleep(60 * 5)
+        sleep(60 * 30) # Alle 30 Minuten aktualisieren
 
 
 def start_refresh_job() -> None:

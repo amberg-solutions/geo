@@ -11,5 +11,14 @@ Das Frontend (HTML, CSS) wurde mithilfe von GPT-5.6 Sol erstellt - das Backend h
 
 Die selbst geschriebene Javscript API, lädt asynchron die geographischen Informationen aus der Datenbank, und rendert sie im Frontend der App. 
 
+Verwendete Referenzen:
+- https://geopandas.org/en/stable/gallery/polygon_plotting_with_folium.html
+- https://python-visualization.github.io/folium/latest/advanced_guide/polygons_from_list_of_points.html
+- https://docs.cockroachlabs.com/docs/v26.3/srid-4326
+- https://docs.cockroachlabs.com/docs/v26.3/geojson
+- https://postgis.net/docs/ST_Area.html
+- GPT-5.6 Sol
+- Gemini
+
 ## Author
 Kai Lanz
