@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetchRegions();
     fetchLastUpdateTs();
     fetchSurfaceArea();
+    fetchRegionCount();
 });
 
 async function fetchHtmlMap(region = "all") {
@@ -88,7 +89,25 @@ async function fetchLastUpdateTs() {
         lastUpdateNode.innerHTML = data["ts"] ?? `-`
     } catch (error) {
         log.error(`Fehler beim Abfragen des letzten Updates: ${error}`);
-        lastUpdateNode = ``
+        lastUpdateNode = `-`
+    }
+}
+
+async function fetchRegionCount() {
+    const totalRegionsNode = document.getElementById("total-regions");
+
+    try {
+        response = await fetch(`/api/fetch_region_count`);
+
+        if (!response.ok) {
+            throw new Error(`Fehler beim Abfragen von /api/fetch_region_count: ${response.status}`);
+        }
+
+        data = await response.json();
+        totalRegionsNode.innerHTML = data["count"] ?? `-`
+    } catch (error) {
+        log.error(`Fehler beim Abfragen der Anzahl Regionen: ${error}`);
+        totalRegionsNode = `-`
     }
 }
 

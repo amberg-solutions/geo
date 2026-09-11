@@ -27,33 +27,20 @@
                 <p class="eyebrow">Raumdaten</p>
                 <h2 id="page-title">Kartenübersicht</h2>
             </div>
-            <p class="intro-copy">Standorte und Kennzahlen im Kanton Graubünden.</p>
+            <p class="intro-copy">Toursimusdestinationen in Graubünden.</p>
         </section>
 
-        <form class="search-bar" id="map-search" role="search">
-            <div class="search-field">
-                <i data-lucide="search" aria-hidden="true"></i>
-                <label class="visually-hidden" for="search-query">Karte durchsuchen</label>
-                <input id="search-query" name="query" type="search" placeholder="Ort, Adresse oder Objekt suchen">
-            </div>
-            <label class="visually-hidden" for="search-region">Region</label>
-            <select id="search-region" name="region">
-                <option value="all" selected>Alle Regionen</option>
-            </select>
-            <button class="primary-button" type="submit">
-                <i data-lucide="arrow-right" aria-hidden="true"></i>
-                <span>Suchen</span>
-            </button>
-        </form>
 
         <section class="kpi-grid" aria-label="Kennzahlen">
+            <form id="map-search" class="kpi-card">
+                <label class="visually-hidden" for="search-region">Region</label>
+                <select id="search-region" name="region">
+                    <option value="all" selected>Alle Regionen</option>
+                </select>
+            </form>
             <article class="kpi-card">
                 <span class="kpi-icon kpi-icon-green"><i data-lucide="map-pin"></i></span>
-                <div><span>Standorte</span><strong>—</strong></div>
-            </article>
-            <article class="kpi-card">
-                <span class="kpi-icon kpi-icon-blue"><i data-lucide="landmark"></i></span>
-                <div><span>Gemeinden</span><strong>—</strong></div>
+                <div><span>Destinationen</span><strong id="total-regions">—</strong></div>
             </article>
             <article class="kpi-card">
                 <span class="kpi-icon kpi-icon-coral"><i data-lucide="scan"></i></span>
@@ -87,7 +74,7 @@
                 <h2 id="project-story-title">Vom Python-Backend zur interaktiven Karte</h2>
                 <p>
                     Dieses Beispielprojekt lädt zyklisch Daten vom Datenportal Graubünden zu Toursimusdestinationen 
-                    und speichert diese in meiner Postgres Datenbank. Beim Besuch der Seite, werden die Daten
+                    und speichert diese in einer Postgres Datenbank in Azure. Beim Besuch der Seite, werden die Daten
                     asynchron von Javascript via eigener API aus Postgres abgerufen und im Frontend gerendert.
                 </p>
                 <div class="tech-list" aria-label="Verwendete Technologien">
@@ -132,14 +119,11 @@
                     </div>
                 </div>
                 <nav class="source-actions" aria-label="Projektressourcen">
-                    <a href="/get_map" target="_blank" rel="noreferrer">
+                    <a href="/api.py" rel="noreferrer">
                         <i data-lucide="braces" aria-hidden="true"></i>
                         API ansehen
                     </a>
-                    <span class="source-link-pending" aria-label="GitHub-Link folgt">
-                        <i data-lucide="github" aria-hidden="true"></i>
-                        GitHub folgt
-                    </span>
+                        <a href="https://github.com/amberg-solutions/geo" target="_blank">Github</a>
                 </nav>
             </div>
         </section>

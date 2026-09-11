@@ -21,7 +21,7 @@ class Data:
         write_json("datasets.json", response)
 
     @classmethod
-    def download_geo_data(cls, dataset_id = "dvs_awt_econ_202601260") -> None:
+    def download_dataset_data(cls, dataset_id = "dvs_awt_econ_202601260", dataset_name: str = "geo") -> None:
         """
         Lädt Geodaten herunter und speichert sie in `data/geo.json`
 
@@ -33,5 +33,5 @@ class Data:
         }
         response = requests.get(url, params=params).json()
 
-        write_json("geo.json", response)
+        write_json(f"{dataset_name}.json", response)
 

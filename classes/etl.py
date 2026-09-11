@@ -22,7 +22,7 @@ class ETL:
             from classes import Data
             from classes import read_json
 
-            Data.download_geo_data()
+            Data.download_dataset_data()
             data = read_json("geo.json")
             if data:
                 return data["results"]

@@ -175,6 +175,24 @@ class Postgres:
             row = cursor.fetchone()
             if row and row[0] is not None:
                 return {
-                    "area": f"{round(float(row[0]), 2)} m²"
+                    "area": f"{round(float(row[0]), 2)} km²"
                 }
         return {"area": "-"}
+
+    @classmethod
+    def fetch_region_count(cls) -> dict:
+        cls.ensure_connection()
+
+        with cls.cnx.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT COUNT(DISTINCT(name))
+                FROM public.geodaten
+                """
+            )
+            row = cursor.fetchone()
+            if row:
+                return {
+                    "count" : row[0]
+                }
+        return {}

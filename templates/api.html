@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f3f6f2">
+    <title>API source</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css">
+</head>
+<body class="source-page">
+    <header class="source-header">
+        <div>
+            <span class="source-language">Python</span>
+            <strong>routes/api.py</strong>
+        </div>
+        <a href="/">Back to map</a>
+    </header>
+    <main class="source-main">
+        <pre><code class="language-python">{{ content }}</code></pre>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

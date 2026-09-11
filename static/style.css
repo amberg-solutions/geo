@@ -44,6 +44,81 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+.source-page {
+    min-height: 100vh;
+    background: #0d1117;
+    color: #f0f3f6;
+}
+
+.source-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 10px clamp(16px, 4vw, 48px);
+    border-bottom: 1px solid #30363d;
+    background: rgba(13, 17, 23, 0.94);
+    backdrop-filter: blur(12px);
+}
+
+.source-header > div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.source-header strong {
+    font-size: 14px;
+}
+
+.source-header a {
+    color: #79c0ff;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.source-header a:hover {
+    text-decoration: underline;
+}
+
+.source-language {
+    padding: 5px 8px;
+    border: 1px solid #3d444d;
+    border-radius: 4px;
+    color: #a5d6ff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.source-main {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 48px);
+}
+
+.source-main pre {
+    margin: 0;
+    overflow: auto;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    background: #161b22;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.source-main code.hljs {
+    min-width: max-content;
+    padding: clamp(18px, 3vw, 32px);
+    background: transparent;
+    font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
 button,
 input,
 select {
